@@ -1,2 +1,2 @@
-@include('map_element')
-@include('map_script')
+@include('googlmapper::map_element')
+@include('googlmapper::map_script')
