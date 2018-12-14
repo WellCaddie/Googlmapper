@@ -799,7 +799,7 @@ abstract class MapperBase implements MappingBaseInterface
             throw new MapperArgumentException('Invalid map width setting.');
         }
 
-        $this->width = $width;
+        $this->width = $value;
     }
 
     /**
@@ -827,7 +827,7 @@ abstract class MapperBase implements MappingBaseInterface
             throw new MapperArgumentException('Invalid map height setting.');
         }
 
-        $this->height = $height;
+        $this->height = $value;
     }
 
     /**
