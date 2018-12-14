@@ -124,6 +124,42 @@ class Map implements ModelingInterface {
 			->render();
 	}
 
+    /**
+     * Render the model item HTML element.
+     *
+     * @param integer $identifier
+     * @param View    $view
+     *
+     * @return string
+     */
+    public function renderElement($identifier, View $view)
+    {
+        return $view->make('googlmapper::map_element')
+            ->withId($identifier)
+            ->render();
+    }
+
+    /**
+     * Render the model item Javascript element.
+     *
+     * @param integer $identifier
+     * @param View    $view
+     *
+     * @return string
+     */
+    public function renderScript($identifier, View $view)
+    {
+        $options = $this->options;
+        $options['markers'] = $this->getMarkers();
+        $options['shapes'] = $this->getShapes();
+
+        return $view->make('googlmapper::map_script')
+            ->withOptions($options)
+            ->withId($identifier)
+            ->withView($view)
+            ->render();
+    }
+
 	/**
 	 * Return marker items.
 	 *
