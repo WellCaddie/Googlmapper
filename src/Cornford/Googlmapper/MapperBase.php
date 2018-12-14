@@ -67,6 +67,20 @@ abstract class MapperBase implements MappingBaseInterface
 	const CLUSTERS_CENTER = false;
 	const CLUSTERS_SIZE = 2;
 
+    /**
+     * Width.
+     *
+     * @var string
+     */
+    protected $width;
+
+    /**
+     * Height.
+     *
+     * @var string
+     */
+    protected $height;
+
 	/**
 	 * View.
 	 *
@@ -728,6 +742,8 @@ abstract class MapperBase implements MappingBaseInterface
 			throw new MapperArgumentException('Language is required in ISO 639-1 code format.');
 		}
 
+        $this->setWidth(isset($options['width']) ? $options['width'] : '100%');
+        $this->setHeight(isset($options['height']) ? $options['height'] : '100%');
 		$this->setEnabled(isset($options['enabled']) ? $options['enabled'] : self::ENABLED);
 		$this->setKey($options['key']);
 		$this->setRegion(isset($options['region']) ? $options['region'] : self::REGION);
@@ -768,23 +784,79 @@ abstract class MapperBase implements MappingBaseInterface
 		return $this->getEnabled();
 	}
 
-	/**
-	 * Set enabled status.
-	 *
-	 * @param boolean $value
-	 *
-	 * @throws MapperArgumentException
-	 *
-	 * @return void
-	 */
-	protected function setEnabled($value)
-	{
-		if (!is_bool($value)) {
-			throw new MapperArgumentException('Invalid map enabled setting.');
-		}
+    /**
+     * Set width.
+     *
+     * @param string $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    protected function setWidth($value)
+    {
+        if (!is_string($value)) {
+            throw new MapperArgumentException('Invalid map width setting.');
+        }
 
-		$this->enabled = $value;
-	}
+        $this->width = $width;
+    }
+
+    /**
+     * Get the width.
+     *
+     * @return value
+     */
+    protected function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set height.
+     *
+     * @param string $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    protected function setHeight($value)
+    {
+        if (!is_string($value)) {
+            throw new MapperArgumentException('Invalid map height setting.');
+        }
+
+        $this->height = $height;
+    }
+
+    /**
+     * Get the height.
+     *
+     * @return value
+     */
+    protected function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set enabled status.
+     *
+     * @param boolean $value
+     *
+     * @throws MapperArgumentException
+     *
+     * @return void
+     */
+    protected function setEnabled($value)
+    {
+        if (!is_bool($value)) {
+            throw new MapperArgumentException('Invalid map enabled setting.');
+        }
+
+        $this->enabled = $value;
+    }
 
 	/**
 	 * Get the enabled status.
@@ -1712,6 +1784,8 @@ abstract class MapperBase implements MappingBaseInterface
 	protected function getOptions()
 	{
 		return [
+            'width' => $this->getWidth(),
+            'height' => $this->getHeight(),
 			'key' => $this->getKey(),
 			'version' => $this->version,
 			'region' => $this->getRegion(),
