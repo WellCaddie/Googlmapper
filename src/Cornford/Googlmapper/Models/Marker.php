@@ -56,4 +56,17 @@ class Marker implements ModelingInterface {
 		return $this->options;
 	}
 
+    /**
+     * Set the marker icon.
+     *
+     * @var string
+     *
+     * @return Marker
+     */
+    public function setIcon($icon)
+    {
+        $this->options['icon'] = $icon;
+        return $this;
+    }
+
 }
